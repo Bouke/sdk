@@ -62,6 +62,9 @@ setTimeout(async function () {
   connection.onopen = function () { console.debug('dotnet-watch reload socket connected.') }
 
   function updateStaticFile(path) {
+    if (waiting) {
+        return;
+    }
     if (path && path.endsWith('.css')) {
       updateCssByPath(path);
     } else {
